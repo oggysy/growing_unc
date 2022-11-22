@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="image/unichi-makimaki.png">
+  <link rel="apple-touch-icon" href="image/unichi-makimaki.png" sizes="180x180">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
+  <link rel="stylesheet" href="odometer-master/themes/odometer-theme-slot-machine.css">
+  <style>
+    .odometer {
+      font-size: 50px;
+    }
+  </style>
+  <script>
+    window.odometerOptions = {
+      format: '(ddd).dd'
+    };
+  </script>
+  <script src="odometer-master/odometer.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <title>おおきくなるウンチ</title>
+</head>
+
+<body>
+  <div class=title>
+    <h1><span> おおきくなる</span><br>ウンチ
+    </h1>
+  </div>
+  <div class="rope" id="swipe_range">
+    <img src="image/rope.png" id="rope" alt="">
+  </div>
+  <div class="scrolldown1"><span>ながす</span></div>
+
+  <div class=main>
+    <div class="main-image">
+      <img src="image/unichi-makimaki.png" id="unchi" alt="">
+    </div>
+  </div>
+  </div>
+  <div class=text>
+    <p>さいごのウンチは</p>
+    <span class= "odometer" id="text">202201010000</span>
+    <div class ="unit_of_time">
+      <span class="year">ねん</span><span class="month">がつ</span><span class="day">にち</span><span class="hour">じ</span><span class="minute">ふん</span>
+    </div>
+  </div>
+  <script>
+    window.odometerOptions = {
+      format: '(ddd).dd'
+    };
+  </script>
+  <script>
+    window.addEventListener("load", function () {
+        setSwipe("#swipe_range");
+        document.getElementById("rope").height = "200";
+      });
+
+
+
+    let lastTIme = 0;
+
+    //ボタンをクリックした時間を記録する関数
+    function getDateTime(){
+      let now = new Date();
+      let year = now.getFullYear();
+      let month = now.getMonth() + 1;
+      let day = now.getDate();
+      let hour = now.getHours();
+      let minute = now.getMinutes();
+      minute = String(minute).padStart(2, "0");
+      hour = String(hour).padStart(2,"0");
+      lastTIme = new Date();
+      diff = 0;
+      $('.odometer').html(year.toString()+ month.toString() + day.toString() + hour.toString() + minute);
+    };
+      //console.log(lastTIme);
+    //初期値　
+    let unchiSize = document.getElementById("unchi");
+    let diff = 10;
+    unchiSize.width = 0;
+    unchiSize.height = 0;
+
+    //クリックした時間と現在の時間の差分をうんちのサイズに反映する関数
+    function differenceTIme() {
+      if (lastTIme != 0 && diff < 300) {
+        diff = Math.floor((new Date() - lastTIme) / 1000) ;
+        unchiSize.width = diff;
+        unchiSize.height = diff;
+      } else;
+      refresh();
+    }
+
+    //1秒おきに実行するための関数
+    function refresh() {
+      setTimeout(differenceTIme, 1000);
+    }
+
+    differenceTIme();
+
+//スワイプした時の処理
+  function setSwipe(elem) {
+        let t = document.querySelector(elem);
+        let rope_image = document.getElementById("rope");
+        let startX;        // タッチ開始 x座標
+        let startY;        // タッチ開始 y座標
+        let moveX;    // スワイプ中の x座標
+        let moveY;    // スワイプ中の y座標
+        let dist = 30;    // スワイプを感知する最低距離（ピクセル単位）
+        let move_distance; //スワイプ距離
+
+        // タッチ開始時： xy座標を取得
+        t.addEventListener("touchstart", function (e) {
+          e.preventDefault();
+          startX = e.touches[0].pageX;
+          startY = e.touches[0].pageY;
+        });
+
+        // スワイプ中： xy座標を取得
+        t.addEventListener("touchmove", function (e) {
+          e.preventDefault();
+          moveX = e.changedTouches[0].pageX;
+          moveY = e.changedTouches[0].pageY;
+          move_distance = moveY - startY;
+          if(move_distance > 0 && move_distance < 100){
+          rope_image.height = move_distance + 200;
+          rope_image.width = rope_image.width;
+          // rope_image.height = 1000;
+          }
+        });
+
+        // タッチ終了時： 距離が短い場合何もしない
+        t.addEventListener("touchend", function (e) {
+          // console.log(moveY > startY + dist);
+          // console.log(moveY,startX,dist);
+          if (moveY > startY + dist) {        // 右から左にスワイプ
+            getDateTime();
+            moveY = 0;
+            rope_image.height = 170;
+            washAndReset();
+          }
+        });
+
+      }
+
+      // 流すアニメーション
+      function washAndReset(){
+        const documentBody = document.querySelector('body');
+        // body直下にオーバーレイの要素を作成
+        var newElement = document.createElement("div");
+        newElement.setAttribute("class", "topCurtainbg");
+        documentBody.prepend(newElement);
+      }
+
+
+  </script>
+
+
+</body>
+
+</html>

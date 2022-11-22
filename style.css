@@ -1,0 +1,236 @@
+body {
+  background-color: rgb(191, 252, 252);
+}
+
+.title {
+  text-align: center;
+  font-family: "Nico Moji";
+  color: #C27526;
+  font-size: 30px;
+  letter-spacing: 4px;
+  z-index: 10;
+}
+
+.title span {
+  color: rgb(84, 84, 84);
+  z-index: 10;
+}
+
+.rope {
+  position: absolute;
+  top: 0px;
+  left: 10%;
+  width: 100px;
+  height: 300px;
+  text-align: center;
+}
+
+.rope img{
+  transition: 0.3s;
+}
+
+.main-image {
+  height: 200px;
+  width: 200px;
+  background-size: contain;
+  object-fit: cover;
+  margin: 0 auto;
+  position: relative;
+}
+
+#unchi {
+  transition: 1.0s;
+  position: absolute;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -20;
+}
+
+/* .btn {
+  text-align: center;
+}
+
+button {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: 0;
+  font-size: 0;
+  line-height: 0;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.wash img {
+  height: 100px;
+  width: 75px;
+}
+
+.wash {
+  width: 80%;
+} */
+
+.text {
+  margin-top: 10px;
+  text-align: center;
+  font-family: "Nico Moji";
+  font-size: 24px;
+}
+
+.unit_of_time{
+  position: relative;
+}
+
+.text .year{
+  position: relative;
+  left: -5%;
+  font-family: "Nico Moji";
+  font-size: 16px;
+  color: rgb(254, 16, 100)
+}
+
+.text .month {
+  position: relative;
+  left: 3%;
+  font-family: "Nico Moji";
+  font-size: 16px;
+  color: rgb(254, 16, 100)
+}
+
+.text .day {
+  position: relative;
+    left: 12%;
+  font-family: "Nico Moji";
+  font-size: 16px;
+  color: rgb(254, 16, 100)
+}
+
+.text .hour {
+  position: relative;
+    left: 20%;
+  font-family: "Nico Moji";
+  font-size: 16px;
+  color: rgb(254, 16, 100)
+}
+
+.text .minute {
+  position: relative;
+    left: 28%;
+  font-family: "Nico Moji";
+  font-size: 16px;
+  color: rgb(254, 16, 100)
+}
+
+.text p {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: rgb(254, 16, 100);
+}
+
+.text span {
+  margin-top: 5px;
+  color: rgb(84, 84, 84);
+  font-size: 24px;
+  font-family: "M PLUS Rounded 1c";
+}
+
+.scrolldown1 {
+  /*描画位置※位置は適宜調整してください*/
+  position: absolute;
+  left: 18%;
+  top: 20%;
+  /*全体の高さ*/
+  height: 50px;
+}
+
+/*Scrollテキストの描写*/
+.scrolldown1 span {
+  /*描画位置*/
+  position: absolute;
+  left: -15px;
+  top: 0px;
+  /*テキストの形状*/
+  color: black;
+  font-family: "Nico Moji";
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+/* 線の描写 */
+.scrolldown1::after {
+  content: "";
+  /*描画位置*/
+  position: absolute;
+  top: 0;
+  /*線の形状*/
+  width: 1px;
+  height: 30px;
+  background: black;
+  /*線の動き1.4秒かけて動く。永遠にループ*/
+  animation: pathmove 1.4s ease-in-out infinite;
+  opacity: 0;
+}
+
+/*高さ・位置・透過が変化して線が上から下に動く*/
+@keyframes pathmove {
+  0% {
+    height: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  30% {
+    height: 30px;
+    opacity: 1;
+  }
+
+  100% {
+    height: 0;
+    top: 50px;
+    opacity: 0;
+  }
+}
+
+.topCurtainbg {
+  display: block;
+  content: "";
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transform: scaleY(0);
+  background-image: url(image/washwater.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation-name: curtainAnime;
+  animation-duration: 2.0s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  z-index: -10;
+}
+
+@keyframes curtainAnime {
+  0% {
+    transform-origin: top;
+    transform: scaleY(0);
+  }
+
+  50% {
+    transform-origin: top;
+    transform: scaleY(2.0);
+  }
+
+  /* 50.001% {
+    transform-origin: bottom;
+  } */
+
+  100% {
+    transform-origin: bottom;
+    transform: scaleY(0);
+  }
+}
